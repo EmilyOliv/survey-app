@@ -12,7 +12,7 @@
 const { configure } = require('quasar/wrappers');
 
 
-module.exports = configure(function (/* ctx */) {
+module.exports = configure(function ( ctx ) {
   return {
     // https://legacy-app.quasar.dev/quasar-cli-vite-v1/prefetch-feature
     // preFetch: true,
@@ -51,7 +51,15 @@ module.exports = configure(function (/* ctx */) {
         node: 'node20'
       },
 
-      vueRouterMode: 'hash', // available values: 'hash', 'history'
+      vueRouterMode: 'history', // available values: 'hash', 'history'
+      env: {
+        SERVER_URL: ctx.dev ? 'http://localhost:3000' : 'http://localhost:3000',
+        CREATOR_NAME: 'Henning Seip',
+        CREATOR_EMAIL: 'henning@candogram.com',
+        LINKEDIN: 'https://www.linkedin.com/in/henningseip/'
+      },
+      distDir: '../server/public',
+ 
       // vueRouterBase,
       // vueDevtools,
       // vueOptionsAPI: false,
@@ -79,6 +87,12 @@ module.exports = configure(function (/* ctx */) {
       ]
     },
 
+    htmlVariables: {
+      productName: 'BAHS Student Job Survey App',
+      productDescription: 'The Bronx Aerospace High School Student Survey App collects job preferences from high school students.'
+    },
+ 
+
     // Full list of options: https://legacy-app.quasar.dev/quasar-cli-vite-v1/quasar-config-file#devserver
     devServer: {
       // https: true
@@ -100,7 +114,9 @@ module.exports = configure(function (/* ctx */) {
       // directives: [],
 
       // Quasar plugins
-      plugins: []
+      plugins: [
+        'Notify'
+      ]
     },
 
     // animations: 'all', // --- includes all animations
